@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+
+.app-header {background-color: bisque;}
+
+.app-body {background-color: bisque;}
+
+.app-footer {background-color: bisque;
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+
+    
+font-family: tahoma;
+
+}
