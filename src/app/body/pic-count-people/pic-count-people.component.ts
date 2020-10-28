@@ -54,10 +54,10 @@ export class PicCountPeopleComponent implements OnInit {
  }
 
  detectFrame = (img, model) => {
-  console.log("bin hier");
+  console.log("bin in pic count people");
   model.detect(img).then(predictions =>
     {
-      console.log("bin hierer");
+      console.log("bin auch in pic count people");
       
       this.renderPredictions(predictions);
        requestAnimationFrame(() => {
