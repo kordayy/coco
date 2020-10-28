@@ -6,7 +6,7 @@ import { VideoCountPeopleComponent } from "./video-count-people/video-count-peop
 import { VideoCountUmbrellaComponent } from "./video-count-umbrella/video-count-umbrella.component";
 
 @NgModule({
-  imports: [CommonModule, BodyPartsModule],
+  imports: [CommonModule],
   declarations: [
     VideoCountCarComponent,
     VideoCountPeopleComponent,

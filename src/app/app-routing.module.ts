@@ -9,7 +9,7 @@ const routes: Routes = [
     { path: "countPeoplePic", component: PicCountPeopleComponent },
   {
     path: "bodyParts",
-    loadChildren: ".\body\bodyParts\body-parts.module#BodyPartsModule",
+    loadChildren: "./body/bodyParts/body-parts.module#BodyPartsModule",
   },
 ];
 
