@@ -7,4 +7,12 @@
   <canvas id="canvas"></canvas>
 
 </div>
-<p>{{counter}}</p>
+<p>Car(s) counted {{counterCar}}</p>
+
+<p>Person(s) : {{counterPerson}}</p>
+<p>Umbrellas : {{counterUmbrella}}</p>
+
+<br>
+<app-video-count-people></app-video-count-people>
+<app-video-count-car [countCars]="counterCar"></app-video-count-car>
+<app-video-count-umbrella></app-video-count-umbrella>

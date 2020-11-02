@@ -7,9 +7,6 @@ import { VideoCountUmbrellaComponent } from "./video-count-umbrella/video-count-
 import { VideoComponent } from "./video/video.component";
 
 const routes: Routes = [
-  { path: "countPeopleVideo", component: VideoCountPeopleComponent },
-  { path: "countCarsVideo", component: VideoCountCarComponent },
-  { path: "countUmrellasVideo", component: VideoCountUmbrellaComponent },
   { path: "videoModule", component: VideoComponent },
 ];
 

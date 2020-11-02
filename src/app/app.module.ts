@@ -12,6 +12,8 @@ import { PicCountPeopleComponent } from "./body/pic-count-people/pic-count-peopl
 import { WebcamModule } from "ngx-webcam";
 import { FormsModule } from "@angular/forms";
 
+import { VideoCountService } from "./body/bodyParts/services/video-count.service";
+
 import { BodyPartsModule } from "./body/bodyParts/body-parts.module";
 
 @NgModule({
@@ -23,7 +25,7 @@ import { BodyPartsModule } from "./body/bodyParts/body-parts.module";
     PicCountPeopleComponent,
   ],
   imports: [BrowserModule, WebcamModule, FormsModule, AppRoutingModule],
-  providers: [],
+  providers: [VideoCountService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

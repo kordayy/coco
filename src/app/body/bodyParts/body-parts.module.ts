@@ -6,6 +6,7 @@ import { VideoCountPeopleComponent } from "./video-count-people/video-count-peop
 import { VideoCountUmbrellaComponent } from "./video-count-umbrella/video-count-umbrella.component";
 import { BodyPartsRoutingModule } from "./body-parts-routing.module";
 import { VideoComponent } from './video/video.component';
+import { VideoCountService } from "./services/video-count.service";
 
 @NgModule({
   imports: [CommonModule, BodyPartsRoutingModule
@@ -16,5 +17,6 @@ import { VideoComponent } from './video/video.component';
     VideoCountUmbrellaComponent,
     VideoComponent,
   ],
+  providers:[VideoCountService]
 })
 export class BodyPartsModule {}

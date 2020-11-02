@@ -1,76 +1,77 @@
-
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { VideoCountService } from '../services/video-count.service';
 
 //import COCO-SSD model as cocoSSD
-import * as cocoSSD from '@tensorflow-models/coco-ssd';
+import * as cocoSSD from "@tensorflow-models/coco-ssd";
 
 @Component({
-  selector: 'app-video',
-  templateUrl: './video.component.html',
-  styleUrls: ['./video.component.css']
+  selector: "app-video",
+  templateUrl: "./video.component.html",
+  styleUrls: ["./video.component.css"],
 })
 export class VideoComponent implements OnInit {
-
-  title = 'TF-ObjectDetection';
+  title = "TF-ObjectDetection";
   private video: HTMLVideoElement;
   classArray: any[];
-  counter : any;
+  counterPerson: number;
+  counterCar: number;
+  counterUmbrella: number;
 
-  ngOnInit()
-  { 
+  constructor(private videoCountService: VideoCountService) {}
+
+  ngOnInit() {
     this.webcam_init();
     this.predictWithCocoModel();
   }
 
-public async predictWithCocoModel(){
-  const model = await cocoSSD.load('lite_mobilenet_v2');
-  this.detectFrame(this.video,model);
-  console.log('model loaded');
-}
-
-webcam_init()
-  {  
-  this.video = <HTMLVideoElement> document.getElementById("vid");
-  
-     navigator.mediaDevices
-    .getUserMedia({
-    audio: false,
-    video: {
-      facingMode: "user",
-    }
-     })
-    .then(stream => {
-    this.video.srcObject = stream;
-    this.video.onloadedmetadata = () => {
-      this.video.play();
-    };
-    });
+  public async predictWithCocoModel() {
+    const model = await cocoSSD.load("lite_mobilenet_v2");
+    this.detectFrame(this.video, model);
+    console.log("model loaded");
   }
-  
+
+  webcam_init() {
+    this.video = <HTMLVideoElement>document.getElementById("vid");
+
+    navigator.mediaDevices
+      .getUserMedia({
+        audio: false,
+        video: {
+          facingMode: "user",
+        },
+      })
+      .then((stream) => {
+        this.video.srcObject = stream;
+        this.video.onloadedmetadata = () => {
+          this.video.play();
+        };
+      });
+  }
+
   detectFrame = (video, model) => {
-    model.detect(video).then(predictions => {
+    model.detect(video).then((predictions) => {
       this.renderPredictions(predictions);
       requestAnimationFrame(() => {
         this.detectFrame(video, model);
       });
     });
-  }
+  };
 
-  renderPredictions = predictions => {
-    const canvas = <HTMLCanvasElement> document.getElementById("canvas");
-    
+  renderPredictions = (predictions) => {
+    const canvas = <HTMLCanvasElement>document.getElementById("canvas");
+
     const ctx = canvas.getContext("2d");
-    console.log(predictions)
-    canvas.width  = 300;
+    console.log(predictions);
+    canvas.width = 300;
     canvas.height = 300;
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     // Font options.
     const font = "16px sans-serif";
     ctx.font = font;
     ctx.textBaseline = "top";
-    ctx.drawImage(this.video,0, 0,300,300);
+    ctx.drawImage(this.video, 0, 0, 300, 300);
 
-    predictions.forEach(prediction => {
+    predictions.forEach((prediction) => {
       // console.log(predictions);
       //this.classArray.push(prediction.class)
       const x = prediction.bbox[0];
@@ -88,26 +89,40 @@ webcam_init()
       ctx.fillRect(x, y, textWidth + 4, textHeight + 40);
     });
 
-    predictions.forEach(prediction => {
+    predictions.forEach((prediction) => {
       const x = prediction.bbox[0];
       const y = prediction.bbox[1];
       // Draw the text last to ensure it's on top.
       ctx.fillStyle = "#000000";
       ctx.fillText(prediction.class, x, y);
     });
-    var count = 0;
+    let countP = 0;
+    let countC = 0;
+    let countU = 0;
 
-    predictions.forEach(prediction => {
-      if( prediction.class === 'person'){
-        count++;
+    predictions.forEach((prediction) => {
+      if (prediction.class === "person") {
+        countP++;
+      }
+      if (prediction.class === "car") {
+        countC++;
+      }
+      if (prediction.class === "umbrella") {
+        countU++;
       }
       // console.log(predictions);
-      this.counter = count;
-      console.log(prediction.class + "  " + prediction.score)
-     
+      
+      console.log(prediction.class + "  " + prediction.score);
+
       //console.log(this.classArray);
     });
+
+    this.counterCar = countC;
+      this.counterPerson = countP;
+      this.counterUmbrella = countU;
+
+      console.log("personen " + countP + "\n regenschirme " + countU);
+    this.videoCountService.bufferPeopleCounts(countP);
+    this.videoCountService.bufferUmbrellaCounts(countU);
   };
-
 }
-
