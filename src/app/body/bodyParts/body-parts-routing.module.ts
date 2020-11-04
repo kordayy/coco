@@ -7,7 +7,9 @@ import { VideoCountUmbrellaComponent } from "./video-count-umbrella/video-count-
 import { VideoComponent } from "./video/video.component";
 
 const routes: Routes = [
-  { path: "videoModule", component: VideoComponent },
+  { path: "videoModuleCar", component: VideoComponent },
+  { path: "videoModulePeople", component: VideoComponent },
+  { path: "videoModuleUmbrella", component: VideoComponent },
 ];
 
 @NgModule({

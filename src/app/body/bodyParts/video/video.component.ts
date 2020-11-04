@@ -1,8 +1,16 @@
 import { Component, OnInit } from "@angular/core";
-import { VideoCountService } from '../services/video-count.service';
+import { VideoCountService } from "../services/video-count.service";
 
 //import COCO-SSD model as cocoSSD
 import * as cocoSSD from "@tensorflow-models/coco-ssd";
+import {
+  ActivatedRoute,
+  PRIMARY_OUTLET,
+  Router,
+  UrlSegment,
+  UrlSegmentGroup,
+  UrlTree,
+} from "@angular/router";
 
 @Component({
   selector: "app-video",
@@ -17,11 +25,38 @@ export class VideoComponent implements OnInit {
   counterCar: number;
   counterUmbrella: number;
 
-  constructor(private videoCountService: VideoCountService) {}
+  constructor(
+    private videoCountService: VideoCountService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    const tree: UrlTree = router.parseUrl("/bodyParts");
+
+    const g: UrlSegmentGroup = tree.root.children[PRIMARY_OUTLET];
+  }
+
+  isUmbrellaRoute() {
+    return this.router.url.includes('/videoModuleUmbrella');
+  }
+  isPersonRoute() {
+    return this.router.url.includes('/videoModulePeople');
+  }
+  isCarRoute() {
+    return this.router.url.includes('/videoModuleCar');
+  }
 
   ngOnInit() {
     this.webcam_init();
     this.predictWithCocoModel();
+    // this.route.parent.url.subscribe((url) => console.log(url[0].path));
+    // this.route.fragment.subscribe(res =>{
+    //   console.log(res);
+    // });
+    // this.route.children[0].subscribe(res =>{
+    //   console.log(res);
+    // });
+    // console.log(g);
+    console.log(this.router.url);
   }
 
   public async predictWithCocoModel() {
@@ -111,17 +146,17 @@ export class VideoComponent implements OnInit {
         countU++;
       }
       // console.log(predictions);
-      
+
       console.log(prediction.class + "  " + prediction.score);
 
       //console.log(this.classArray);
     });
 
     this.counterCar = countC;
-      this.counterPerson = countP;
-      this.counterUmbrella = countU;
+    this.counterPerson = countP;
+    this.counterUmbrella = countU;
 
-      console.log("personen " + countP + "\n regenschirme " + countU);
+    //console.log("personen " + countP + "\n regenschirme " + countU);
     this.videoCountService.bufferPeopleCounts(countP);
     this.videoCountService.bufferUmbrellaCounts(countU);
   };

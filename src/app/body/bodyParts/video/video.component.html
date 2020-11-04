@@ -13,6 +13,6 @@
 <p>Umbrellas : {{counterUmbrella}}</p>
 
 <br>
-<app-video-count-people></app-video-count-people>
-<app-video-count-car [countCars]="counterCar"></app-video-count-car>
-<app-video-count-umbrella></app-video-count-umbrella>
+<app-video-count-people *ngIf="isPersonRoute()"></app-video-count-people>
+<app-video-count-car *ngIf="isCarRoute()"></app-video-count-car>
+<app-video-count-umbrella *ngIf="isUmbrellaRoute()"  ></app-video-count-umbrella>
