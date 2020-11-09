@@ -24,6 +24,7 @@ export class VideoComponent implements OnInit {
   counterPerson: number;
   counterCar: number;
   counterUmbrella: number;
+  nameOfCountedObject: string;
 
   constructor(
     private videoCountService: VideoCountService,
@@ -36,13 +37,25 @@ export class VideoComponent implements OnInit {
   }
 
   isUmbrellaRoute() {
-    return this.router.url.includes('/videoModuleUmbrella');
+    return this.router.url.includes("/videoModuleUmbrella");
   }
   isPersonRoute() {
-    return this.router.url.includes('/videoModulePeople');
+    return this.router.url.includes("/videoModulePeople");
   }
   isCarRoute() {
-    return this.router.url.includes('/videoModuleCar');
+    return this.router.url.includes("/videoModuleCar");
+  }
+
+  isRouteName() {
+    if (this.router.url.includes("/videoModuleUmbrella")) {
+      return this.nameOfCountedObject = "Umbrella";
+    }
+    if (this.router.url.includes("/videoModulePeople")) {
+      return this.nameOfCountedObject = "Personen";
+    }
+    if (this.router.url.includes("/videoModuleCar")) {
+     return this.nameOfCountedObject = "Autos";
+    }
   }
 
   ngOnInit() {

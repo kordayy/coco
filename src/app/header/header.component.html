@@ -1,18 +1,21 @@
-<div class="app-header">
 
-  <ul class="nav nav-tabs">
-    <li class="nav-item">
+<div class="app-header">
+<div>
+  <h1>Objekterkennung </h1>
+</div>
+  <ul class="nav nav-tabs" >
+    <li class=" nav-item" [routerLinkActive]="['active']">
       <a class="nav-link " routerLink="/bodyParts/videoModulePeople" href="#">Count People in Video</a>
     </li>
-    <li class="nav-item">
+    <li class=" nav-item" [routerLinkActive]="['active']">
       <a class="nav-link" routerLink="/bodyParts/videoModuleCar" href="#">Count Cars in Video</a>
     </li>
-    <li class="nav-item">
+    <li class=" nav-item " [routerLinkActive]="['active']">
       <a class="nav-link" routerLink="/bodyParts/videoModuleUmbrella">Count Umbrellas in Video</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link " routerLink="/countPeoplePic">Count People in Picture</a>
+    <li class=" nav-item" [routerLinkActive]="['active']">
+      <a class="nav-link"  routerLink="/countPeoplePic">Count People in Picture</a>
     </li>
   </ul>
-
 </div>
+

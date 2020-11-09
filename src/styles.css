@@ -3,17 +3,17 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 
 
+*{
+    font-family: tahoma !important;
+}
 
-.app-header {background-color: bisque;}
+.app-header {background-color: lightgray;}
 
-.app-body {background-color: bisque;}
+.app-body {background-color: lightgray;}
 
-.app-footer {background-color: bisque;
+.app-footer {background-color: lightgray;
     display: flex;
-    flex-direction: column;
-    margin-top: auto;
-
     
-font-family: tahoma;
+    margin-top: auto;
 
 }

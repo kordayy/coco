@@ -1,0 +1,12 @@
+h1 {
+  text-align: center;
+  
+}
+
+.active,
+.btn:hover {
+  background-color: blanchedalmond;
+  color: white;
+}
+
+
